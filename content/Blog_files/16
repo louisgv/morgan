@@ -1,0 +1,179 @@
+
+
+ 
+
+
+(function() {
+
+// Localize jQuery variable
+var jQuery;
+
+/******** Load jQuery if not present *********/
+if (window.jQuery === undefined || window.jQuery.fn.jquery !== '1.7.2') {
+
+    var script_tag = document.createElement('script');
+    script_tag.setAttribute("type","text/javascript");
+    script_tag.setAttribute("src",
+        "http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js");
+    if (script_tag.readyState) {
+      script_tag.onreadystatechange = function () { // For old versions of IE
+          if (this.readyState == 'complete' || this.readyState == 'loaded') {
+              scriptLoadHandler();
+          }
+      };
+    } else {
+      script_tag.onload = scriptLoadHandler;
+    }
+    // Try to find the head, otherwise default to the documentElement
+    (document.getElementsByTagName("head")[0] || document.documentElement).appendChild(script_tag);
+
+    
+} else {
+    // The jQuery version on the window is the one we want to use
+    jQuery = window.jQuery;
+    main();
+}
+
+/******** Called once jQuery has loaded ******/
+function scriptLoadHandler() {
+    // Restore $ and window.jQuery to their previous values and store the
+    // new jQuery in our local jQuery variable
+    jQuery = window.jQuery.noConflict(true);
+
+   
+}
+
+/******** Our main function ********/ 
+
+(function(funcName, baseObj) {
+    // The public function name defaults to window.docReady
+    // but you can pass in your own object and own function name and those will be used
+    // if you want to put them in a different namespace
+    funcName = funcName || "docReady";
+    baseObj = baseObj || window;
+    var readyList = [];
+    var readyFired = false;
+    var readyEventHandlersInstalled = false;
+    
+    // call this when the document is ready
+    // this function protects itself against being called more than once
+    function ready() {
+        if (!readyFired) {
+            // this must be set to true before we start calling callbacks
+            readyFired = true;
+            for (var i = 0; i < readyList.length; i++) {
+                // if a callback here happens to add new ready handlers,
+                // the docReady() function will see that it already fired
+                // and will schedule the callback to run right after
+                // this event loop finishes so all handlers will still execute
+                // in order and no new ones will be added to the readyList
+                // while we are processing the list
+                readyList[i].fn.call(window, readyList[i].ctx);
+            }
+            // allow any closures held by these functions to free
+            readyList = [];
+        }
+    }
+    
+    function readyStateChange() {
+        if ( document.readyState === "complete" ) {
+            ready();
+        }
+    }
+    
+    // This is the one public interface
+    // docReady(fn, context);
+    // the context argument is optional - if present, it will be passed
+    // as an argument to the callback
+    baseObj[funcName] = function(callback, context) {
+        // if ready has already fired, then just schedule the callback
+        // to fire asynchronously, but right away
+        if (readyFired) {
+            setTimeout(function() {callback(context);}, 1);
+            return;
+        } else {
+            // add the function and context to the list
+            readyList.push({fn: callback, ctx: context});
+        }
+        // if document already ready to go, schedule the ready function to run
+        if (document.readyState === "complete") {
+            setTimeout(ready, 1);
+        } else if (!readyEventHandlersInstalled) {
+            // otherwise if we don't have event handlers installed, install them
+            if (document.addEventListener) {
+                // first choice is DOMContentLoaded event
+                document.addEventListener("DOMContentLoaded", ready, false);
+                // backup is window load event
+                window.addEventListener("load", ready, false);
+            } else {
+                // must be IE
+                document.attachEvent("onreadystatechange", readyStateChange);
+                window.attachEvent("onload", ready);
+            }
+            readyEventHandlersInstalled = true;
+        }
+    }
+})("docReady", window);
+
+         /******* Load HTML *******/
+        //this nees to come back in json format 
+         
+         docReady(function() {
+         document.getElementById("newswhip-trending").innerHTML= "\n\n\n\n\n\n\n\n\n\n\n\n<body>\n\n<style type=\"text\/css\" media=\"screen\">\n#newswhip-trending .stats {width: 90px !important;}\n#newswhip-trending .comments i { float: left; background: url(http:\/\/static.newswhip.com\/static\/images\/DailyKos\/socials.png?domain=www) no-repeat 0 0; width: 11px; height: 11px; margin: 2px 3px 0 0; }\n#newswhip-trending .recs{ float: right !important; }\n#newswhip-trending .recs i { float: left; background: url(http:\/\/static.newswhip.com\/static\/images\/DailyKos\/socials.png?domain=www) no-repeat 0 -12px; width: 11px; height: 11px; margin: 2px 3px 0 0; }\n#newswhip-trending .navigation {display: none !important;}\n#newswhip-trending .collapsable-panel{margin-bottom: 0px !important;}\n.nw-powered { margin-bottom: 20px;font-size: 11px; padding: 0 0.5em 0.5em;}\n.nw-powered, .nw-powered a { color: #666; }\n<\/style>\n\n<script type=\"text\/javascript\">\n  \n(function(i,s,o,g,r,a,m){i[\'GoogleAnalyticsObject\']=r;i[r]=i[r]||function(){\n\t  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),\n\t  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)\n\t  })(window,document,\'script\',\'\/\/www.google-analytics.com\/analytics.js\',\'ga\');\n\n\t  ga(\'create\', \'UA-18201240-5\', \'newswhip.com\');\n\t  ga(\'send\', \'pageview\');\n\n\n<\/script>\n\n<div id=\"newswhip_shared_div\" class=\"featured-articles collapsable-panel ajax-paged\">\n<a class=\"collapsor\" href=\"#\"><h2 class=\"tight\" id=\"newswhip_shared\">Most Shared<\/h2><\/a>\n<ul class=\"articles ajax-paged-content\">\n\n\t\n\t\t<li class=\"clearfix\"> <div><a class=\"title\" href=\"http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1377034\/-Idaho-House-panel-risks-46-million-in-funding-to-needy-families-because-of-Sharia-law-worries\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1377034\/-Idaho-House-panel-risks-46-million-in-funding-to-needy-families-because-of-Sharia-law-worries\');\">Idaho House panel risks $46 million in funding to needy families because of Sharia law worries<\/a><\/div>\n\t\t\n\t\t\n\t\t\t<span class=\"byline\"><span class=\"by\">by<\/span> <a href=\"http:\/\/www.dailykos.com\/user\/The Book Bear\" class=\"author\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'The Book Bear\');\">The Book Bear<\/a><\/span> \n\t\t\n\t\t<span class=\"stats\">\n\t\t\t<span class=\"comments\">\n\t\t\t\t<i><\/i>28\n\t\t\t<\/span>\t\n\t\t\t<span class=\"recs\">\n\t\t\t\t<i><\/i>5\n\t\t\t\t<\/span>\n\t\t<\/span>\n\t\t<\/li>\n\t\n\t\t<li class=\"clearfix\"> <div><a class=\"title\" href=\"http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1376740\/-Chris-Christie-to-relaunch-his-presidential-campaign-yet-again\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1376740\/-Chris-Christie-to-relaunch-his-presidential-campaign-yet-again\');\">Chris Christie to relaunch his presidential campaign, yet again<\/a><\/div>\n\t\t\n\t\t\n\t\t\t<span class=\"byline\"><span class=\"by\">by<\/span> <a href=\"http:\/\/www.dailykos.com\/user\/Hunter\" class=\"author\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'Hunter\');\">Hunter<\/a><\/span> \n\t\t\n\t\t<span class=\"stats\">\n\t\t\t<span class=\"comments\">\n\t\t\t\t<i><\/i>1\n\t\t\t<\/span>\t\n\t\t\t<span class=\"recs\">\n\t\t\t\t<i><\/i>19\n\t\t\t\t<\/span>\n\t\t<\/span>\n\t\t<\/li>\n\t\n\t\t<li class=\"clearfix\"> <div><a class=\"title\" href=\"http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1377029\/-How-The-Public-Can-Help-Increase-Good-Cops-In-U-S-Law-Enforcement-Organizations\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1377029\/-How-The-Public-Can-Help-Increase-Good-Cops-In-U-S-Law-Enforcement-Organizations\');\">How The Public Can Help Increase Good Cops In U.S. Law Enforcement Organizations<\/a><\/div>\n\t\t\n\t\t\n\t\t\t<span class=\"byline\"><span class=\"by\">by<\/span> <a href=\"http:\/\/www.dailykos.com\/user\/The Law Project\" class=\"author\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'The Law Project\');\">The Law Project<\/a><\/span> \n\t\t\n\t\t<span class=\"stats\">\n\t\t\t<span class=\"comments\">\n\t\t\t\t<i><\/i>21\n\t\t\t<\/span>\t\n\t\t\t<span class=\"recs\">\n\t\t\t\t<i><\/i>5\n\t\t\t\t<\/span>\n\t\t<\/span>\n\t\t<\/li>\n\t\n\t\t<li class=\"clearfix\"> <div><a class=\"title\" href=\"http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1377032\/-Fareed-Zakaria-educates-Bill-Maher-Intelligence-over-willful-ignorance\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1377032\/-Fareed-Zakaria-educates-Bill-Maher-Intelligence-over-willful-ignorance\');\">Fareed Zakaria educates Bill Maher - Intelligence over willful ignorance<\/a><\/div>\n\t\t\n\t\t\n\t\t\t<span class=\"byline\"><span class=\"by\">by<\/span> <a href=\"http:\/\/www.dailykos.com\/user\/Egberto Willies\" class=\"author\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'Egberto Willies\');\">Egberto Willies<\/a><\/span> \n\t\t\n\t\t<span class=\"stats\">\n\t\t\t<span class=\"comments\">\n\t\t\t\t<i><\/i>15\n\t\t\t<\/span>\t\n\t\t\t<span class=\"recs\">\n\t\t\t\t<i><\/i>6\n\t\t\t\t<\/span>\n\t\t<\/span>\n\t\t<\/li>\n\t\n\t\t<li class=\"clearfix\"> <div><a class=\"title\" href=\"http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1376744\/-Americans-views-on-abortion-complex-but-focused-on-understanding-for-nbsp-women\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'http:\/\/www.dailykos.com\/story\/2015\/04\/11\/1376744\/-Americans-views-on-abortion-complex-but-focused-on-understanding-for-nbsp-women\');\">Americans\' views on abortion complex, but focused on understanding for\u00A0women<\/a><\/div>\n\t\t\n\t\t\n\t\t\t<span class=\"byline\"><span class=\"by\">by<\/span> <a href=\"http:\/\/www.dailykos.com\/user\/Joan McCarter\" class=\"author\" onClick=\"ga( \'send\', \'event\', \'click\', \'DailyKos\', \'Joan McCarter\');\">Joan McCarter<\/a><\/span> \n\t\t\n\t\t<span class=\"stats\">\n\t\t\t<span class=\"comments\">\n\t\t\t\t<i><\/i>5\n\t\t\t<\/span>\t\n\t\t\t<span class=\"recs\">\n\t\t\t\t<i><\/i>16\n\t\t\t\t<\/span>\n\t\t<\/span>\n\t\t<\/li>\n\t\n<\/ul>\n<ul class=\"navigation\">\n<li class=\"next\"><a class=\"do-page-next ajaxON\" href=\"\/part\/sidebar\/stories\/editors_choice?page=1\">Next<\/a><\/li>\n<\/ul>\n<\/div>\n\n<\/body>\n\n\n\n\n\n\n\n\n";
+		
+
+		  
+          
+
+function checkCookie(clicked) {
+    var compact = getCookie("newswhip-compact");
+    if (compact != "") {
+        if (clicked == "true") {
+            setCookie("newswhip-compact", true, -1);
+        } else {
+            var a = $("#newswhip-trending .collapsor");
+            a.parent("div.collapsable-panel").toggleClass("collapsed");
+            a.blur();
+            kck.set_coll_pref(a.parent());
+        }
+
+
+    } else {
+        if (clicked == "true") {
+            setCookie("newswhip-compact", true, 365);
+        }
+    }
+}
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    var expires = "expires=" + d.toGMTString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+
+
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) return c.substring(name.length, c.length);
+    }
+    return "";
+}
+
+checkCookie("false");
+$("#newswhip-trending .collapsor").click(function () {
+    checkCookie("true")
+});
+$("#newswhip-trending .collapsor").click(App.onAjaxButtonCollapse);
+          
+          
+        });
+    
+    
+    
+
+
+})(); // We call our anonymous function immediately
