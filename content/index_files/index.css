@@ -1,0 +1,1077 @@
+/*
+Theme Name: kumario
+Theme URI: http://twitter.com/jkooms
+Author: Jonathan Kumar
+Author URI: http://twitter.com/jkooms
+Description: The 2013 theme for Jonathan Kumar is build upon the fundamentals of twenty twelve by the Wordpress staff. Features include minimalistic functions, a "storytelling" aesthetic, and a background of changing personal images.
+Version: 1.0
+License: All Rights Reserved
+License URI: http://twitter.com/jkooms
+Tags: light, gray, white, one-column, fixed-header, custom-background, editor-style, featured-images, full-width-template, microformats, post-formats, rtl-language-support, sticky-post, translation-ready
+Text Domain: kumario
+
+*/
+
+/* =Notes
+--------------------------------------------------------------
+This stylesheet uses rem values with a pixel fallback. The rem
+values (and line heights) are calculated using two variables:
+
+$rembase:     14;
+$line-height: 24;
+
+---------- Examples
+
+* Use a pixel value with a rem fallback for font-size, padding, margins, etc.
+	padding: 5px 0;
+	padding: 0.357142857rem 0; (5 / $rembase)
+
+* Set a font-size and then set a line-height based on the font-size
+	font-size: 16px
+	font-size: 1.142857143rem; (16 / $rembase)
+	line-height: 1.5; ($line-height / 16)
+
+---------- Vertical spacing
+
+Vertical spacing between most elements should use 24px or 48px
+to maintain vertical rhythm:
+
+.my-new-div {
+	margin: 24px 0;
+	margin: 1.714285714rem 0; ( 24 / $rembase )
+}
+
+---------- Further reading
+
+http://snook.ca/archives/html_and_css/font-size-with-rem
+http://blog.typekit.com/2011/11/09/type-study-sizing-the-legible-letter/
+
+
+/* =Reset
+-------------------------------------------------------------- */
+
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}
+
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+
+/* Responsive images and other embedded objects
+   Note: keeping IMG here will cause problems if you're using foreground images as sprites, like, say for Google Maps custom placemarkers.
+   There has been a report of problems with standard Google maps as well, but we haven't been able to duplicate or diagnose the issue. */
+img,
+object,
+embed {max-width: 100%;}
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {overflow-y: scroll;}
+
+/* we use a lot of ULs that aren't bulleted.
+	don't forget to restore the bullets within content. */
+
+
+blockquote, q {quotes: none;}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {content: ''; content: none;}
+
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+
+del {text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;}
+
+/* table stuff.  tables still need cellspacing="0" in the markup */
+table {border-collapse: collapse; border-spacing: 0;}
+th {font-weight: bold; vertical-align: bottom;}
+td {font-weight: normal; vertical-align: top;}
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;}
+
+input, select {vertical-align: middle;}
+
+pre {
+	white-space: pre; /* CSS2 */
+	white-space: pre-wrap; /* CSS 2.1 */
+	white-space: pre-line; /* CSS 3 (and 2.1 as well, actually) */
+	word-wrap: break-word; /* IE */
+}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom; *vertical-align: baseline;}
+.ie6 input {vertical-align: text-bottom;}
+
+select, input, textarea {font: 99% sans-serif;}
+
+table {font-size: inherit; font: 100%;}
+
+/* Helping ppl navigate by keyboard. */
+a:hover, a:active {outline: none;}
+
+small {font-size: 85%;}
+
+strong, th {font-weight: bold;}
+
+td, td img {vertical-align: top;}
+
+/* Make sure sup and sub don't screw with your line-heights
+	gist.github.com/413930 */
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+/* hand cursor on clickable elements */
+.clickable,
+label,
+input[type=button],
+input[type=submit],
+button {cursor: pointer;}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {margin: 0;}
+
+/* make buttons play nice in IE */
+button {width: auto; overflow: visible;}
+
+/* scale images in IE7 more attractively */
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+/* prevent BG image flicker upon hover */
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+
+/* then, let's clear some floats */
+.clearfix:before, .clearfix:after { content: "\0020"; display: block; height: 0; overflow: hidden; }
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1; }
+
+img.alignright { float: right; margin: 0 0 1em 1em; }
+img.alignleft { float: left; margin: 0 1em 1em 0; }
+img.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+.alignright { float: right; }
+.alignleft { float: left; }
+.aligncenter { display: block; margin-left: auto; margin-right: auto; }
+
+
+/* Ok, this is where the fun starts. (apparently)
+-------------------------------------------------------------------------------*/
+
+/* just for now..  Will change later. */
+body {font: 13px Helmet, Freesans, sans-serif;}
+
+/* using local fonts? make sure to read up on Paul Irish's
+	Bulletproof @font-face syntax: http://mky.be/font-face/bulletproof/
+
+@font-face {
+  font-family: 'Graublau Web';
+  src: url('GraublauWeb.eot?') format('eot'), url('GraublauWeb.woff') format('woff'), url('GraublauWeb.ttf') format('truetype');
+}	*/
+
+/* off-black is best for text */
+body, select, input, textarea {color: #000000;}
+
+a {color: #03f;}
+a:hover {color: #69f;}
+
+/* Custom text-selection colors (remove any text shadows: twitter.com/miketaylr/status/12228805301) */
+::-moz-selection{background: #00B3DC; color: #fff; text-shadow: none;}
+::selection {background: #00B3DC; color: #fff; text-shadow: none;}
+
+/*	j.mp/webkit-tap-highlight-color (for safari web content) */
+a:link {-webkit-tap-highlight-color: #00B3DC;}
+
+ins {background-color: #00B3DC; color: #000; text-decoration: none;}
+mark {background-color: #00B3DC; color: #000; font-style: italic; font-weight: bold;}
+
+
+
+/* And here begins the Wordpress fun.
+-------------------------------------------------------------------------------*/
+
+body {
+	background: #F1EBE1;
+	margin: 0 auto;
+	font-family: "minion-pro",sans-serif;
+}
+
+#wrapper {max-width: 1120px;margin: 0 auto;}
+
+p {
+	color: #403539;
+	font-size: 1.25em;
+	margin-bottom: 1.5em;
+	line-height: 1.75em;
+	font-weight: 100;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+::selection {
+background: #403539;
+color: white;
+text-shadow: none;
+}
+
+a {
+	color: #403539;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #927f78;
+	-o-transition: all .125s linear;
+	-moz-transition: all .125s linear;
+	-webkit-transition: all .125s linear;
+	transition: all .125s linear;
+}
+
+header {}
+
+header img {width: 400px;}
+
+header h1 {font-size: 3em; float: left;}
+
+.hero {
+width: 100%;
+height: 300px;
+padding-top: 0px;
+margin-bottom: 0px;
+
+
+
+}
+
+.hero a {
+
+background: transparent url(rotate.php) fixed center top;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+display: block;
+width: 100%;
+height: 100%;
+border-bottom-left-radius: 0px;
+margin-left: 0px;
+}
+
+
+.menu {
+	height: 50px;
+	text-align: center;
+	max-width: 100%;
+	margin-top: 20px;
+  	position: relative;
+	background-color: #fff;
+	margin: 0 auto;
+	width: 100%;
+	-webkit-box-shadow: 0 1px 5px -1px #333;
+	-moz-box-shadow: 0 1px 5px -1px #333;
+	box-shadow: 0 1px 5px -1px #333;
+	clear: both;
+	z-index: 9999 !important;
+}
+
+.menu li {
+  display: inline-block;
+  width: 22%;
+  max-width: 160px;
+  padding: 3px 0px 0 0em;
+  margin-top: 10px;
+}
+
+
+
+
+a.J  {
+  background: url(https://dl.dropboxusercontent.com/u/38930645/kumar.io/home-round-top.png) no-repeat;
+  padding: 31px 0px 200px;
+  padding-right: 8px;
+  background-size: 160px 192px;
+  margin-right: 50px;
+}
+
+ul {
+	color: #403539;
+	font-size: 1.25em;
+	margin-bottom: 1.5em;
+	line-height: 1.5em;
+	font-weight: 100;
+	margin-left: 10%;
+}
+
+
+article {
+	margin-bottom: 6em;
+	padding-left: 0%;
+
+}
+
+article p {
+
+}
+
+article h1 {
+	font-size: 3em;
+	margin-bottom: 1.4em;
+	font-weight: 300;
+	color: #927f78;
+}
+
+article h1 a {
+	color: #927f78;
+	font-style: normal;
+}
+
+article h2 {
+	font-size: 3em;
+	margin-bottom: 1.2em;
+	font-weight: 300;
+	font-style: italic;
+}
+
+article h2 a {
+	color: #403539;
+	font-style: italic;
+}
+
+article h2 a:hover {
+	color: #927f78;
+}
+
+.archive_category {
+	display:none;
+}
+
+h4 {
+	font-size: 1.3em;
+	margin-bottom: .7em;
+	color: #000000;
+}
+
+h3 {
+	font-size: 1.5em;
+	margin-bottom: 1.4em;
+	color: #000000;
+}
+
+.entry-title {
+	margin-top: 1em;
+	text-align: center;
+	font-size: 2.65em;
+	width: 80%;
+	padding-left: 0px;
+	margin-bottom: 1em;
+	padding-left: 10%;
+	line-height: 1.4em;
+}
+
+.entry {
+	font-size: 1em;
+	margin-bottom: 4em;
+
+}
+
+.entry-meta {
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.meta {
+	margin-bottom: 2em;
+	color: #7b7b7b;
+	display: none;
+}
+
+.site-contact {
+	text-align: center;
+	padding-bottom: 5px;
+}
+
+.postmetadata {
+	margin-bottom: 4em;
+	display: none;
+}
+
+a {
+    color: #927f78;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #afa09d;
+}
+
+.description {
+	display: none;
+}
+
+.post {
+    width: 80%;
+    margin: 0 auto 5em;
+    border-bottom: 1px solid #f5f5f5;
+}
+
+.entry-content {
+	margin: 12em 1em 5em 20%;
+	width: 75%;
+}
+
+.entry-content a {}
+.entry-content a:hover {}
+
+#content .hentry {
+    background: none repeat scroll 0% 0% #FCFBF7;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 150px;
+	padding-top: 25px;
+}
+
+#meta {}
+.postmetadata {}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+caption,
+th,
+td {
+	font-weight: normal;
+	text-align: left;
+}
+
+#sidebar {
+	float: right;
+    width: 36.7777778%;
+    display: none;
+}
+
+.navigation {width: 90%; margin: 0 auto;}
+.next-posts {clear: both; float: left; margin: 0 20%;}
+.prev-posts {clear: both; float: right; margin: 0 20%;}
+
+#searchform {}
+#s {}
+#searchsubmt {}
+
+ol.commentlist {list-style: none;display: none;}
+ol.commentlist li {}
+ol.commentlist li.alt {}
+ol.commentlist li.bypostauthor {}
+ol.commentlist li.byuser {}
+ol.commentlist li.comment-author-admin {}
+ol.commentlist li.comment {border-bottom: 1px dotted #666; padding: 10px;}
+ol.commentlist li.comment div.comment-author {}
+ol.commentlist li.comment div.vcard {}
+ol.commentlist li.comment div.vcard cite.fn {font-style: normal;}
+ol.commentlist li.comment div.vcard cite.fn a.url {}
+ol.commentlist li.comment div.vcard img.avatar {float:right; margin: 0 0 10px 10px;}
+ol.commentlist li.comment div.vcard img.avatar-32 {}
+ol.commentlist li.comment div.vcard img.photo {}
+ol.commentlist li.comment div.vcard span.says {}
+ol.commentlist li.comment div.commentmetadata {}
+ol.commentlist li.comment div.comment-meta {font-size: 10px;}
+ol.commentlist li.comment div.comment-meta a {color: #ccc;}
+ol.commentlist li.comment p {}
+ol.commentlist li.comment ul {}
+ol.commentlist li.comment div.reply {font-size: 11px;}
+ol.commentlist li.comment div.reply a {font-weight: bold;}
+ol.commentlist li.comment ul.children {list-style: none; margin: 10px 0 0;}
+ol.commentlist li.comment ul.children li {}
+ol.commentlist li.comment ul.children li.alt {}
+ol.commentlist li.comment ul.children li.bypostauthor {}
+ol.commentlist li.comment ul.children li.byuser {}
+ol.commentlist li.comment ul.children li.comment {}
+ol.commentlist li.comment ul.children li.comment-author-admin {}
+ol.commentlist li.comment ul.children li.depth-2 {border-left: 5px solid #555; margin: 0 0 10px 10px;}
+ol.commentlist li.comment ul.children li.depth-3 {border-left: 5px solid #999; margin: 0 0 10px 10px;}
+ol.commentlist li.comment ul.children li.depth-4 {border-left: 5px solid #bbb; margin: 0 0 10px 10px;}
+ol.commentlist li.comment ul.children li.depth-5 {}
+ol.commentlist li.comment ul.children li.odd {}
+ol.commentlist li.even {background: #fff;}
+ol.commentlist li.odd {background: #f6f6f6;}
+ol.commentlist li.parent {border-left: 5px solid #111;}
+ol.commentlist li.thread-alt {}
+ol.commentlist li.thread-even {}
+ol.commentlist li.thread-odd {}
+
+html {
+	overflow-y: scroll;
+	font-size: 100%;
+	-webkit-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+}
+
+}
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+nav,
+section {
+	display: block;
+}
+audio,
+canvas,
+video {
+	display: inline-block;
+}
+audio:not([controls]) {
+	display: none;
+}
+del {
+	color: #333;
+}
+
+
+
+/* Media queries!
+-------------------------------------------------------------------------------*/
+
+/* Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-width: 480px) {
+
+			a.J
+			{
+			background-size: 100px 120px;
+			margin-right: 0px;
+			padding-right: 27px;
+			}
+
+
+		.hero {height: 200px;}
+
+		p {font-size: 1.25em;}
+		ul {font-size: 1.3em;}
+		.menu li {padding: 3px 0px 0 0px;}
+
+		.entry-title {
+			margin-top: 1em;
+			text-align: center;
+			font-size: 2em;
+			width: 80%;
+			padding-left: 0px;
+			margin-bottom: 1em;
+			padding-left: 10%;
+			line-height: 1.4em;
+		}
+
+		#content .hentry {
+			margin-top: 75px;
+		}
+
+		#nav {margin-top: 10%;}
+
+		article {
+			border-left: none;
+			padding-left: 0%;
+		}
+
+		article h2 {margin-bottom: 1em; font-size: 2em;}
+
+		blockquote {padding-left: 4%;}
+
+		.entry-content {
+			margin: 14em 1em 5em 12%;
+			width: 78%;
+		}
+
+		.post {width: 90%;margin: 0 auto 5em;}
+
+		.meta {margin-bottom: 1em;}
+		.postmetadata {margin-bottom: 1em;}
+
+		.prev-posts {float: left; margin: 0 20%; }
+
+		.next-posts {float: right; margin: 0 20%; }
+
+		.footer_tagline {
+			padding-top: 0px;
+			padding-bottom: 70px;
+		}
+
+
+}
+
+@media screen and (min-width: 481px) {
+
+			a.J
+			{
+			background-size: 125px 150px;
+			margin-right: 0px;
+			padding-right: 20px;
+			}
+
+
+		p {font-size: 1.25em;}
+		ul {font-size: 1.3em;}
+		.menu li {padding: 5px 0px 0 0px; font-size: 1.15em;}
+
+		.entry-title {
+			margin-top: 1em;
+			text-align: center;
+			font-size: 2em;
+			width: 80%;
+			padding-left: 0px;
+			margin-bottom: 1em;
+			padding-left: 10%;
+			line-height: 1.4em;
+		}
+
+		#content .hentry {
+			margin-top: 100px;
+		}
+
+		#nav {margin-top: 10%;}
+
+		article {
+			border-left: none;
+			padding-left: 0%;
+		}
+
+		article h2 {margin-bottom: 1em; font-size: 2em;}
+
+		blockquote {padding-left: 4%;}
+
+		.entry-content {
+			margin: 14em 1em 0em 8%;
+			width: 84%;
+		}
+
+		.post {width: 90%;margin: 0 auto 5em;}
+
+		.meta {margin-bottom: 1em;}
+		.postmetadata {margin-bottom: 1em;}
+
+		.prev-posts {float: left; margin: 0 20%; }
+
+		.next-posts {float: right; margin: 0 20%; }
+
+		.footer_tagline {
+			padding-top: 0px;
+			padding-bottom: 70px;
+		}
+
+
+}
+
+@media screen and (min-width: 768px) {
+
+			a.J
+			{
+			background-size: 150px 180px;
+			margin-right: 0px;
+			padding-right: 64px;
+			}
+
+		.menu li {padding: 5px 0px 0 0px; font-size: 1.20em;}
+
+		.entry-title {
+			margin-top: 1em;
+			text-align: center;
+			font-size: 2.5em;
+			width: 100%;
+			padding-left: 0px;
+			margin-bottom: 1em;
+			padding-left: 10%;
+			line-height: 1.4em;
+		}
+
+		#content .hentry {
+			margin-top: 90px;
+		}
+
+		#nav {margin-top: 10%;}
+
+		article {
+			border-left: none;
+			padding-left: 0%;
+		}
+
+		article h2 {margin-bottom: 1em; font-size: 2em;}
+
+		blockquote {padding-left: 4%;}
+
+		.entry-content {
+			margin: 16em 1em 5em 8%;
+			width: 85%;
+		}
+
+		p {
+			font-size: 1.5em;
+		}
+
+		.post {width: 54%;margin: 0 auto 5em;}
+
+		.meta {margin-bottom: 1em;}
+		.postmetadata {margin-bottom: 1em;}
+
+		.prev-posts {float: left; margin: 0 20%; }
+
+		.next-posts {float: right; margin: 0 20%; }
+
+		.footer_tagline {
+			padding-top: 0px;
+			padding-bottom: 70px;
+		}
+
+
+}
+
+@media screen and (min-width: 940px) {
+
+			a.J
+			{
+			background-size: 160px 192px;
+			margin-right: 0px;
+			padding-right: 80px;
+			}
+
+		.menu li {padding: 13px 0px 0 0px; margin: 0em 0.75em; font-size: 1.15em;}
+
+		.entry-title {
+			margin-top: 1em;
+			text-align: center;
+			font-size: 2.75em;
+			width: 70%;
+			padding-left: 0px;
+			margin-bottom: 1em;
+			padding-left: 15%;
+			line-height: 1.4em;
+		}
+
+		#content .hentry {
+			margin-top: 135px;
+		}
+
+		#nav {margin-top: 10%;}
+
+		article {
+			border-left: none;
+			padding-left: 0%;
+		}
+
+		article h2 {margin-bottom: 1em; font-size: 2em;}
+
+		blockquote {padding-left: 4%;}
+
+		.entry-content {
+			margin: 16em 1em 5em 12%;
+			width: 75%;
+			min-width: 600px;
+
+		}
+
+		.post {width: 80%;margin: 0 auto 5em;}
+
+		.meta {margin-bottom: 1em;}
+		.postmetadata {margin-bottom: 1em;}
+
+		.prev-posts {float: left; margin: 0 20%; }
+
+		.next-posts {float: right; margin: 0 20%; }
+
+		.footer_tagline {
+			padding-top: 0px;
+			padding-bottom: 70px;
+		}
+
+
+}
+
+@media all and (min-width: 1200px) {
+
+			a.J
+			{
+			background-size: 180px 216px;
+			margin-right: 0px;
+			padding-right: 80px;
+			}
+
+		.menu li {padding: 13px 0px 0 0px; margin: 0em 0.75em; font-size: 1.15em;}
+
+		.entry-title {
+			margin-top: 1.25em;
+			text-align: center;
+			font-size: 3em;
+			width: 80%;
+			padding-left: 0px;
+			margin-bottom: 1em;
+			padding-left: 10%;
+			line-height: 1.4em;
+		}
+
+		#content .hentry {
+			margin-top: 135px;
+		}
+
+		#nav {margin-top: 10%;}
+
+		article {
+			border-left: none;
+			padding-left: 0%;
+		}
+
+		article h2 {margin-bottom: 1em; font-size: 2em;}
+
+		blockquote {padding-left: 4%;}
+
+		.entry-content {
+			margin: 17em 1em 5em 13%;
+			max-width: 700px;
+			min-width: 600px;
+
+
+		}
+
+		.post {
+			margin: 0px auto 5em;
+			width: 50%;
+			min-width: 600px;
+		}
+
+		.meta {margin-bottom: 1em;}
+		.postmetadata {margin-bottom: 1em;}
+
+		.prev-posts {float: left; margin: 0 20%; }
+
+		.next-posts {float: right; margin: 0 20%; }
+
+		.footer_tagline {
+			padding-top: 0px;
+			padding-bottom: 70px;
+		}
+
+}
+
+@media all and (min-width: 1600px) {
+
+			a.J
+			{
+			background-size: 180px 216px;
+			margin-right: 0px;
+			padding-right: 180px;
+			}
+
+		.menu li {padding: 13px 0px 0 0px; margin: 0em 0.75em; font-size: 1.15em;}
+
+		.entry-title {
+			margin-top: 1.25em;
+			text-align: center;
+			font-size: 3.25em;
+			width: 80%;
+			padding-left: 0px;
+			margin-bottom: 1em;
+			padding-left: 10%;
+			line-height: 1.4em;
+		}
+
+		#content .hentry {
+			margin-top: 150px;
+		}
+
+		#nav {margin-top: 10%;}
+
+		article {
+			border-left: none;
+			padding-left: 0%;
+		}
+
+		article h2 {margin-bottom: 1em; font-size: 2em;}
+
+		blockquote {padding-left: 4%;}
+
+		.entry-content {
+			margin: 17em 1em 5em 14%;
+			width: 700px;
+
+		}
+
+		.post {width: 60%;margin: 0 auto 5em;}
+
+		.meta {margin-bottom: 1em;}
+		.postmetadata {margin-bottom: 1em;}
+
+		.prev-posts {float: left; margin: 0 20%; }
+
+		.next-posts {float: right; margin: 0 20%; }
+
+		.footer_tagline {
+			padding-top: 0px;
+			padding-bottom: 70px;
+		}
+}
+
+video#bgvid {
+
+  position: relative; right: 0; bottom: 0;
+
+  min-width: 100%; min-height: 100%;
+
+  width: auto; height: auto; z-index: -100;
+
+  display: block;
+
+  background: url(crowd_1.jpg) no-repeat;
+
+  background-size: cover;
+
+}
+
+div#stuffs{
+    position: absolute;
+    background: #F0E9DE;
+    width: 100%;
+}
+
+}
+
+
+
+
+
+
+
+/* =Widgets
+-------------------------------------------------------------- */
+
+
+
+/* =Plugins
+----------------------------------------------- */
+
+
+
+/* =Print
+----------------------------------------------- */
+
+@media print {
+	body {
+		background: none !important;
+		color: #000;
+		font-size: 10pt;
+	}
+	footer a[rel=bookmark]:link:after,
+	footer a[rel=bookmark]:visited:after {
+		content: " [" attr(href) "] "; /* Show URLs */
+	}
+	a {
+		text-decoration: none;
+	}
+	.entry-content img,
+	.comment-content img,
+	.author-avatar img,
+	img.wp-post-image {
+		border-radius: 0;
+		box-shadow: none;
+	}
+	.site {
+		clear: both !important;
+		display: block !important;
+		float: none !important;
+		max-width: 100%;
+		position: relative !important;
+	}
+	.site-header {
+		margin-bottom: 72px;
+		margin-bottom: 5.142857143rem;
+		text-align: left;
+	}
+	.site-header h1 {
+		font-size: 21pt;
+		line-height: 1;
+		text-align: left;
+	}
+	.site-header h2 {
+		color: #000;
+		font-size: 10pt;
+		text-align: left;
+	}
+	.site-header h1 a,
+	.site-header h2 a {
+		color: #000;
+	}
+	.author-avatar,
+	#colophon,
+	#respond,
+	.commentlist .comment-edit-link,
+	.commentlist .reply,
+	.entry-header .comments-link,
+	.entry-meta .edit-link a,
+	.page-link,
+	.site-content nav,
+	.widget-area,
+	img.header-image,
+	.main-navigation {
+		display: none;
+	}
+	.wrapper {
+		border-top: none;
+		box-shadow: none;
+	}
+	.site-content {
+		margin: 0;
+		width: auto;
+	}
+	.singular .entry-header .entry-meta {
+		position: static;
+	}
+	.singular .site-content,
+	.singular .entry-header,
+	.singular .entry-content,
+	.singular footer.entry-meta,
+	.singular .comments-title {
+		margin: 0;
+		width: 100%;
+	}
+	.entry-header .entry-title,
+	.entry-title,
+	.singular .entry-title {
+		font-size: 21pt;
+	}
+	footer.entry-meta,
+	footer.entry-meta a {
+		color: #444;
+		font-size: 10pt;
+	}
+	.
+	.author-description {
+		float: none;
+		width: auto;
+	}
+
+	/* Comments */
+	.commentlist > li.comment {
+		background: none;
+		position: relative;
+		width: auto;
+	}
+	.commentlist .avatar {
+		height: 39px;
+		left: 2.2em;
+		top: 2.2em;
+		width: 39px;
+	}
+	.comments-area article header cite,
+	.comments-area article header time {
+		margin-left: 50px;
+		margin-left: 3.57142857rem;
+	}
+}
