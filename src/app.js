@@ -12,9 +12,11 @@ app.use('/node', express.static('content'));
 
 var map = {
     'start' : { 0 : 'dispa', 1 : 'dispa', 2 : 'dispa', file : "start.html" },
-    'dispa' : { 0 : 'strat', 1 : 'strat', 2 : 'strat', file : "Facebook.html", zed : "Test comment number 1", one : "Test comment number 2", two : "Test comment number 3" },
-    'strat' : {	0 : 'event', 1 : 'event', 2 : 'event', file : "Twitter.html" },
-    'event' : {	0 : 'nlike', 1 : 'ylike', 2 : 'nlike', file : "Facebook.html" },
+    'dispa' : { 0 : 'strat', 1 : 'strat', 2 : 'strat', file : "captionimage.html", zed : "Test comment number 1", one : "Test comment number 2", two : "Test comment number 3" },
+    'strat' : {	0 : 'rpoor', 1 : 'rpoor', 2 : 'rpoor', file : "captionimage.html" },
+    'rpoor' : {	0 : 'event', 1 : 'event', 2 : 'event', file : "captionimage.html" },
+    'event' : {	0 : 'fbook', 1 : 'fbook', 2 : 'fbook', file : "captionimage.html" },
+    'fbook' : {	0 : 'nlike', 1 : 'ylike', 2 : 'nlike', file : "Facebook.html" },
     'nlike' : { 0 : 'sprot', 1 : 'sprot', 2 : 'sprot', file : "Facebook.html" },
     'ylike' : { 0 : 'sprot', 1 : 'sprot', 2 : 'sprot', file : "Facebook.html" },
     'sprot' : { 0 : '3prot', 1 : '3prot', 2 : '1prot', file : "Facebook.html" },
@@ -34,6 +36,7 @@ var map = {
 }
 
 var narrative = {
+<<<<<<< HEAD
     'start' : 'This is the start',
     'dispa' : 'There is a lot of disparity',
     'strat' : 'Stratification is high',
@@ -54,6 +57,30 @@ var narrative = {
     '1died' : 'Nobody wants to protest if it isnt nice out',
     '3died' : 'Nobody wants to protest if it isnt nice out',
     '_exit' : 'You\'ve been manipulated. Now it is your turn',
+=======
+    'start' : { narrative: 'This is the start' },
+    'dispa' : { narrative: 'There is a lot of disparity', image: 'richpoor.jpg' },
+    'strat' : { narrative: 'Stratification is high', image: 'gentrify.jpg' },
+    'rpoor' : { narrative: 'Poor getting poorer', image: 'poor.jpg' },
+    'event' : { narrative: 'Shocking events happen', image: 'event.jpg' },
+    'fbook' : { narrative: 'Shocking events happen' },
+    'nlike' : { narrative: 'Boo, this is lame', image: 'image.jpg' },
+    'ylike' : { narrative: 'Finally time that the news shows this happening', image: 'image.jpg' },
+    'sprot' : { narrative: 'Protestors are gathering', image: 'image.jpg' },
+    '3prot' : { narrative: 'The protestors are restless and numerous', image: 'image.jpg' },
+    '3pigs' : { narrative: 'The police are here to save the day', image: 'image.jpg' },
+    '3viol' : { narrative: 'The hooligans are being kept in line', image: 'image.jpg' },
+    '3riot' : { narrative: 'Rioters block the streets in business district', image: 'image.jpg' },
+    '3cage' : { narrative: 'Violent protestors met by peaceful police', image: 'image.jpg' },
+    '1prot' : { narrative: 'These guys are just sitting around', image: 'image.jpg' },
+    '1pigs' : { narrative: 'The police dont know what they are doing', image: 'image.jpg' },
+    '1viol' : { narrative: 'Unrecognized protestors are being violent', image: 'image.jpg' },
+    '1riot' : { narrative: 'Rioters make it unsafe to protest peacefully', image: 'image.jpg' },
+    '1cage' : { narrative: 'It feels safe to protest in a free speech zone', image: 'image.jpg' },
+    '1died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
+    '3died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
+    '_exit' : { narrative: 'Youve been manipulated. Now it is your turn', image: 'image.jpg' }
+>>>>>>> origin/gh-pages
 }
 
 function embed(req, res) {
@@ -61,7 +88,11 @@ function embed(req, res) {
 	fs.readFile('./content/' + map[req.params.pgsrc].file, function (err, data) {
 		if (err) return res.json({error : err});
                 var string = "" + data;
-		res.write(string.replace("--REPLACE--", narrative[req.session.page]));
+
+                if (narrative[req.session.page].image)      string = string.replace("--IMAGEVALUE--", narrative[req.session.page].image);
+                if (narrative[req.session.page].narrative)  string = string.replace("--REPLACE--", narrative[req.session.page].narrative);
+                
+		res.write(string);
                 res.end();
         });
 }
