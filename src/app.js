@@ -53,7 +53,7 @@ var narrative = {
     '1cage' : 'It feels safe to protest in a free speech zone',
     '1died' : 'Nobody wants to protest if it isnt nice out',
     '3died' : 'Nobody wants to protest if it isnt nice out',
-    '_exit' : 'Youve been manipulated. Now it is your turn',
+    '_exit' : 'You\'ve been manipulated. Now it is your turn',
 }
 
 function embed(req, res) {
