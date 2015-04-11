@@ -41,6 +41,28 @@ var map = {
 }
 
 var narrative = {
+<<<<<<< HEAD
+    'start' : 'This is the start',
+    'dispa' : 'There is a lot of disparity',
+    'strat' : 'Stratification is high',
+    'event' : 'Shocking events happen',
+    'nlike' : 'Boo, this is lame',
+    'ylike' : 'Finally time that the news shows this happening',
+    'sprot' : 'Protestors are gathering',
+    '3prot' : 'The protestors are restless and numerous',
+    '3pigs' : 'The police are here to save the day',
+    '3viol' : 'The hooligans are being kept in line',
+    '3riot' : 'Rioters block the streets in business district',
+    '3cage' : 'Violent protestors met by peaceful police',
+    '1prot' : 'These guys are just sitting around',
+    '1pigs' : 'The police dont know what they are doing',
+    '1viol' : 'Unrecognized protestors are being violent',
+    '1riot' : 'Rioters make it unsafe to protest peacefully',
+    '1cage' : 'It feels safe to protest in a free speech zone',
+    '1died' : 'Nobody wants to protest if it isnt nice out',
+    '3died' : 'Nobody wants to protest if it isnt nice out',
+    '_exit' : 'You\'ve been manipulated. Now it is your turn',
+=======
     'start' : { narrative: 'This is the start' },
     'dispa' : { narrative: 'There is a lot of disparity', image: 'richpoor.jpg' },
     'strat' : { narrative: 'Stratification is high', image: 'gentrify.jpg' },
@@ -68,6 +90,7 @@ var narrative = {
     '1died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
     '3died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
     '_exit' : { narrative: 'Youve been manipulated. Now it is your turn', image: 'image.jpg' }
+>>>>>>> origin/gh-pages
 }
 
 function embed(req, res) {
