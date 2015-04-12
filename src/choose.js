@@ -2,6 +2,40 @@ var fs =  require('fs');
 var map = require('./map.js').map;
 var nar = require('./narrative.js');
 
+function createnarrativeget (req, res) {
+    fs.readFile('./content/_ending_form_files.htm', function (err, data) {
+        if (err) return res.json({error : err});
+        var s_str = ("" + data).split('<!-- LOOP -->')[0];
+        var e_str = ("" + data).split('<!-- LOOP -->')[1];
+
+        var html = "<form id=\"submitnarrative\" action=\"create\" method=\"POST\">";
+
+        var count = 1;
+
+        for (var key in map) {
+            if (key == "start" || key == "_exit") continue;
+
+            html += "<div style=\"height: 717px;\" class=\"slide" + count + " slide\">\r\n"
+            html += "<div class=\"content-frame\">\r\n"
+
+            html += "<input type=\"textarea\" name=\"" + key + "\" style=\"width: 100%; height: 100\" /><br>\r\n"
+            html += "<iframe src=\"content/" + key + "\" width=\"100%\" height=\"100%\" frameBorder=\"0\"></iframe>\r\n"
+
+            html += "</div>\r\n"
+            html += "</div>"
+
+            count++
+        }
+
+        html += "</form>"
+
+        var string = s_str + html + e_str;
+
+        res.write(string);
+        res.end();
+    });
+}
+
 module.exports.embed = function (req, res) {
         var narrative = req.session.narrative;
 
@@ -9,9 +43,12 @@ module.exports.embed = function (req, res) {
 		if (err) return res.json({error : err});
                 var string = "" + data;
 
-                if (narrative[req.session.page].image)      string = string.replace("--IMAGEVALUE--", narrative[req.session.page].image);
-                if (narrative[req.session.page].narrative)  string = string.replace("--REPLACE--", narrative[req.session.page].narrative);
-                
+/*                if (narrative[req.session.page].image)      string = string.replace("--IMAGEVALUE--", narrative[req.session.page].image);
+                if (narrative[req.session.page].narrative)  string = string.replace("--REPLACE--", narrative[req.session.page].narrative);*/
+
+                if (narrative[req.params.pgsrc].image)      string = string.replace("--IMAGEVALUE--", narrative[req.params.pgsrc].image);
+                if (narrative[req.params.pgsrc].narrative)  string = string.replace("--REPLACE--", narrative[req.params.pgsrc].narrative);
+
 		res.write(string);
                 res.end();
         });
@@ -22,7 +59,10 @@ module.exports.retrieve = function (req, res) {
 
         if (s.page == null) s.page = 'start';
         if (s.narrative == null) s.narrative = nar.default;
-        if (s.page == "start" || s.page == "_exit") return res.sendfile(map[s.page].file, {root : 'content'});
+        if (s.page == "start") return res.sendfile(map[s.page].file, {root : 'content'});
+        if (s.page == "_exit") return createnarrativeget(req, res);
+
+        console.log(s.page);
 
         var html = "<html><body><iframe src=\"content/";
         if (s.page == null) s.page = "start";
@@ -56,4 +96,10 @@ module.exports.process = function (req, res) {
         }
 
 	return res.redirect('/');
+}
+
+module.exports.createnarrativeget = createnarrativeget;
+
+module.exports.createnarrativepost = function (req, res) {
+
 }

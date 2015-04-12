@@ -13,6 +13,9 @@ app.use(express.bodyParser());
 app.use(express.static('content'));
 app.use('/content', express.static('content'));
 
+app.get ('/index.html', function (req, res) {
+    res.sendfile('index.html');
+});
 app.get ('/', choose.retrieve);
 app.get ('/content/:pgsrc', choose.embed);
 app.post('/', choose.process);
@@ -23,5 +26,8 @@ app.get ('/play/:uuid', function (req, res) {
         res.redirect('/');
     });
 });
+
+app.get ('/create', choose.createnarrativeget);
+app.post('/create', choose.createnarrativepost);
 
 module.exports = app;

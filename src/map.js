@@ -28,5 +28,5 @@ module.exports.map = {
     '1cage' : { 0 : '1died', 1 : '1died', 2 : '1died', file : "captionimage.html" },
     '1died' : {	0 : '_exit', 1 : '_exit', 2 : '_exit', file : "Facebook.html" },
     '3died' : { 0 : '_exit', 1 : '_exit', 2 : '_exit', file : "Facebook.html" },
-    '_exit' : { 0 : '_exit', 1 : '_exit', 2 : '_exit', file : "outtro.html" },
+    '_exit' : { 0 : '_exit', 1 : '_exit', 2 : '_exit', file : "outtro.html" }
 }

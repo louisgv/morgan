@@ -43,7 +43,7 @@
     	$('.slide').css({
     		'height': (($(window).height()) - 72)
     	});
-    	$('iframe').css({
+    	$('table').css({
     		'height': (($(window).height()) - 72)
     	});
 
