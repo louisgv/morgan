@@ -1,25 +1,41 @@
 var count = 1;
 
-var max = 7;
+$(document).ready(function() {
 
-//function onNext()
+  var b = $(".bottom-arrow");
 
-//function onPrev(){}
+  var u = $(".up-arrow");
 
-$(document).ready(function(){
-    $(".bottom-arrow").click(function (e) {
-        if(count < max)
-          count++;
-        goToByScroll("slide" + count);
-        //    console.log("#slide" + count);
+  b.click(function(e) {
+    if ($(".slide" + (+count + 1)).length) {
 
-    });
-    $(".up-arrow").click(function (e){
-        if (count > 1)
-          count--;
-        goToByScroll("slide" + count);
-          //  console.log("#slide" + count);
+      b.html('<span class="arrow-bounce">&#x25BC;</span>');
+      u.html('<span class="arrow-bounce">&#x25B2;</span>');
 
-    });
+      count++;
 
+      goToByScroll("slide" + count);
+
+    } else {
+
+		}
+
+		if(!($(".slide" + (+count+1)).length)) {
+      b.html('<span class="arrow-bounce">&#x276d;</span>');
+    }
+
+  });
+  u.click(function(e) {
+    if (count > 1) {
+      count--;
+      goToByScroll("slide" + count);
+
+			b.html('<span class="arrow-bounce">&#x25BC;</span>');
+      u.html('<span class="arrow-bounce">&#x25B2;</span>');
+
+    }
+		if (count == 1){
+      u.html('<span class="arrow-bounce">&#x27b0;</span>');
+    }
+  });
 })
