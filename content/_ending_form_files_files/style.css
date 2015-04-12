@@ -13,6 +13,7 @@ body {
         margin: 0px;
         background: #303235;
         color: #303235;
+        overflow:hidden;
 }
 h1, h2, h3, h4, h5, h6 {
         -webkit-margin-before: 0px;
@@ -133,9 +134,6 @@ td .top {
         margin: auto;
         padding: 50px 50px 70px 50px;
 }
-.content-frame-seven {
-        background: url('/web/20120919192412/http://impressapenguin.com/img/smartphone-penguin2.gif') no-repeat right bottom;
-}
 .slide1 {
         background: #f2eee2;
         cursor: pointer;
@@ -180,29 +178,22 @@ a.footer:hover {
 
 #scroll {
 
-
   text-align: center;
 
-	width: 50px;
+	width: 45px;
 
-	height: 50px;
+	height: 45px;
 
-	background: rgba(0,0,0,1);
-	border-radius: 50%;
-	margin: 0 auto;
-  margin-top: -55px;
-  margin-right: -25px;
-	color: white;
-	padding-top: 0px;
-	font-size: 26px;
-  line-height: 26px;
+	background: rgba(0,0,0,0.36);
+
+  border-radius: 18%;
+  margin: 0 auto;
+
+  color: white;
+	font-size: 1.8em;
 	cursor: pointer;
 
-	font-size: 2.6em;
-
 	position: fixed;
-
-
 
 	@include transition(transform 0.6s ease);
 
@@ -225,6 +216,20 @@ a.footer:hover {
 		position: relative;
 		bottom: -10px;
 	}
+
+  transition-duration:          .45s;
+  -moz-transition-duration:     .45s;
+  -webkit-transition-duration:  .45s;
+  -o-transition-duration:       .45s;
+}
+
+#scroll:hover {
+	background: rgba(0,0,0, 0.72);
+
+}
+
+#scroll:active{
+  background: rgba(0,0,0, 0.99);
 }
 
 .arrow-bounce{
@@ -236,6 +241,7 @@ a.footer:hover {
 }
 
 .up-arrow{
+  line-height: 45px;
 
 	left: 90%;
 
@@ -243,6 +249,8 @@ a.footer:hover {
 }
 
 .bottom-arrow {
+
+  line-height: 50.4px;
 
 	left: 90%;
 
