@@ -136,26 +136,26 @@ td .top {
 .content-frame-seven {
         background: url('/web/20120919192412/http://impressapenguin.com/img/smartphone-penguin2.gif') no-repeat right bottom;
 }
-.first {
+.slide1 {
         background: #f2eee2;
         cursor: pointer;
 }
-.second {
+.slide2 {
         background: #e2e9ed;
 }
-.third {
+.slide3 {
         background: #ccded0;
 }
-.fourth {
+.slide4 {
         background: #f3734f;
 }
-.fifth {
+.slide5 {
         background: #cfd7e8;
 }
-.sixth {
+.slide6 {
         background: #f3734f;
 }
-.seventh {
+.slide7 {
         background: white;
 }
 #footer {
@@ -177,14 +177,74 @@ a.footer:hover {
         color: #f3734f;
 }
 
-.arrow {
-  float:right;
-  position:relative;
-  width: 0px;
-	height: 0px;
-	border-style: solid;
-	border-width: 3em 3em 0 3em;
-	//border-shadow: 1px 1px 50px #218e9e;
-	border-color: #00adef transparent transparent transparent;
-  -webkit-transform:rotate(360deg)
+
+#scroll {
+
+
+  text-align: center;
+
+	width: 50px;
+
+	height: 50px;
+
+	background: rgba(0,0,0,1);
+	border-radius: 50%;
+	margin: 0 auto;
+  margin-top: -55px;
+  margin-right: -25px;
+	color: white;
+	padding-top: 0px;
+	font-size: 26px;
+  line-height: 26px;
+	cursor: pointer;
+
+	font-size: 2.6em;
+
+	position: fixed;
+
+
+
+	@include transition(transform 0.6s ease);
+
+
+	&.clicked {
+		-webkit-transform: rotate(360deg);
+		-moz-transform: rotate(360deg);
+		-o-transform: rotate(360deg);
+		-ms-transform: rotate(360deg);
+	}
+
+	&.rotate {
+		-webkit-transform: rotate(180deg);
+		-moz-transform: rotate(180deg);
+		-o-transform: rotate(180deg);
+		-ms-transform: rotate(3180deg);
+	}
+
+	span {
+		position: relative;
+		bottom: -10px;
+	}
+}
+
+.arrow-bounce{
+	-webkit-animation:   arrow 1s infinite;
+	-moz-animation:     arrow 1s infinite;
+	-o-animation:       arrow 1s infinite;
+	animation:          arrow 1s infinite;
+	animation-timing-function: cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.up-arrow{
+
+	left: 90%;
+
+	bottom: 18%;
+}
+
+.bottom-arrow {
+
+	left: 90%;
+
+	bottom: 9%;
 }
