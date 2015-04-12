@@ -13,7 +13,7 @@ function createnarrativeget (req, res) {
         var count = 1;
 
         for (var key in map) {
-            if (key == "start" || key == "_exit") continue;
+            if (key == "start" || key == "_exit" || key == "outtr") continue;
 
             html += "<div style=\"height: 717px;\" class=\"slide" + count + " slide\">\r\n"
             html += "<div class=\"content-frame\">\r\n"
@@ -61,6 +61,10 @@ module.exports.retrieve = function (req, res) {
         if (s.narrative == null) s.narrative = nar.default;
         if (s.page == "start") return res.sendfile(map[s.page].file, {root : 'content'});
         if (s.page == "_exit") return createnarrativeget(req, res);
+        if (s.page == "outtr") {
+            s.page = "_exit";
+            return res.sendfile(map["outtr"].file, {root: 'content'});
+        }
 
         console.log(s.page);
 

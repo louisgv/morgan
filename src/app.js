@@ -14,6 +14,8 @@ app.use(express.static('content'));
 app.use('/content', express.static('content'));
 
 app.get ('/index.html', function (req, res) {
+    req.session.choices = [];
+    res.session.page = null;
     res.sendfile('index.html');
 });
 app.get ('/', choose.retrieve);
