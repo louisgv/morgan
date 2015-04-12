@@ -256,3 +256,8 @@ a.footer:hover {
 
 	bottom: 9%;
 }
+
+input.narrator-subtitle {
+  width: 100%;
+  height: 100%;
+}
