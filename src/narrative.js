@@ -32,6 +32,7 @@ module.exports.default = {
     '1cage' : { narrative: 'Violent protestors met by peaceful police', image: 'gates.jpg' },
     '1died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
     '3died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
+    'outtr' : { narrative: 'You\'ve been manipulated.', image: 'image.jpg' },
     '_exit' : { narrative: 'You\'ve been manipulated. Now it is your turn', image: 'image.jpg' }
 }
 
