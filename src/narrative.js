@@ -5,7 +5,7 @@ var collection = module.exports.db = db.get('narrativecollection');
 module.exports.default = {
     'start' : { narrative: 'This is the start' },
     'dispa' : { narrative: 'Entrepeneur\'s amazing house brings wealth to poor neighborhood', image: 'richpoor.jpg' },
-    'strat' : { narrative: 'New business district to increase population', image: 'gentrify.jpg' },
+    'strat' : { narrative: 'New business district to attract tourism', image: 'gentrify.jpg' },
     'rpoor' : { narrative: 'Poor get help finding new homes outside the city', image: 'poor.jpg' },
     'event' : { narrative: 'Community get together during hard times', image: 'event.jpg' },
     'fbook' : { narrative: 'Poor communities protest demolition of large apartment complexes' },

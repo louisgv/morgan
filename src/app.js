@@ -14,15 +14,18 @@ app.use(express.static('content'));
 app.use('/content', express.static('content'));
 
 app.get ('/index.html', function (req, res) {
-    req.session.choices = [];
-    res.session.page = null;
-    res.sendfile('index.html');
+    if (req.session != null) {
+        req.session.choices = [];
+        req.session.page = null;
+    }
+    return res.sendfile('index.html');
 });
 app.get ('/', choose.retrieve);
 app.get ('/content/:pgsrc', choose.embed);
 app.post('/', choose.process);
 
 app.get ('/play/:uuid', function (req, res) {
+    console.log('play');
     nar.loadnarrative(req.params.uuid, function (val) {
         req.session.narrative = val;
         res.redirect('/');
