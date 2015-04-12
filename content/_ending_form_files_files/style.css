@@ -1,0 +1,190 @@
+/*
+     FILE ARCHIVED ON 19:24:12 Sep 19, 2012 AND RETRIEVED FROM THE
+     INTERNET ARCHIVE ON 23:24:06 Apr 11, 2015.
+     JAVASCRIPT APPENDED BY WAYBACK MACHINE, COPYRIGHT INTERNET ARCHIVE.
+
+     ALL OTHER CONTENT MAY ALSO BE PROTECTED BY COPYRIGHT (17 U.S.C.
+     SECTION 108(a)(3)).
+*/
+
+body {
+        font-family: "warnock-pro";
+        letter-spacing: 0.02em;
+        margin: 0px;
+        background: #303235;
+        color: #303235;
+}
+h1, h2, h3, h4, h5, h6 {
+        -webkit-margin-before: 0px;
+        -webkit-margin-after: 0px;
+        -moz-margin-before: 0px;
+        -moz-margin-after: 0px;
+}
+h1, h2, h3, h4, h5, h6 {
+        font-weight: 400;
+}
+h1 {
+        font-size: 2.6em;
+        line-height: 1.2em;
+}
+h2 {
+        font-size: 2em;
+}
+h3 {
+        font-size: 1.7em;
+        line-height: 1.6em;
+}
+h4 {
+        font-size: 1.6em;
+        line-height: 1.6em;
+}
+h5 {
+        font-size: 1.5em;
+        line-height: 1.6em;
+}
+h6 {
+        font-size: 1.4em;
+        line-height: 1.55em;
+}
+#clickToContinue {
+        font-family: "futura-pt";
+        font-size: 1em;
+        font-weight: 800;
+        letter-spacing: 0.2em;
+        background-color: rgba(0, 0, 0, 0.17);
+        color: white;
+        padding: 20px 20px 20px 20px;
+        margin: 0px 80px 0px 80px;
+        border-radius: 30px;
+}
+p {
+        font-size: 2.6em;
+        font-weight: 700;
+}
+.q {
+        color: #303235;
+}
+a {
+        text-decoration: underline;
+        color: #303235;
+}
+a:hover, a.white:hover {
+        color: #f3734f;
+}
+a.big {
+        color: #f3734f;
+        text-decoration: none;
+}
+a.big:hover {
+        text-shadow: 0 0 6px #F5D0A9;
+}
+a.white {
+        color: white;
+}
+a.white:hover {
+        color: #303235;
+}
+.white {
+        color: white;
+}
+.black {
+        color: #303235;
+}
+img {
+        padding-bottom: 30px;
+        max-width: 600px;
+}
+#link {
+        z-index: 1;
+}
+.slide {
+        margin: 36px;
+        -moz-box-shadow: 0 0 5px #000;
+        -webkit-box-shadow: 0 0 5px #000;
+        box-shadow: 0 0 5px #000;
+}
+.slide one:hover {
+        cursor: pointer;
+}
+table, tr, td, th {
+        vertical-align: middle;
+        text-align: center;
+        width: 100%;
+        border-collapse: collapse;
+        border: none border-spacing: 0;
+        padding: 0;
+        margin: 0;
+}
+table .top {
+        vertical-align: top;
+}
+tr .top {
+        vertical-align: top;
+}
+td .top {
+        vertical-align: top;
+}
+.content-frame, .content {
+        text-align: center;
+}
+.content {
+        min-width: 400px;
+        max-width: 600px;
+        margin: auto;
+        padding: 50px 50px 70px 50px;
+}
+.content-frame-seven {
+        background: url('/web/20120919192412/http://impressapenguin.com/img/smartphone-penguin2.gif') no-repeat right bottom;
+}
+.first {
+        background: #f2eee2;
+        cursor: pointer;
+}
+.second {
+        background: #e2e9ed;
+}
+.third {
+        background: #ccded0;
+}
+.fourth {
+        background: #f3734f;
+}
+.fifth {
+        background: #cfd7e8;
+}
+.sixth {
+        background: #f3734f;
+}
+.seventh {
+        background: white;
+}
+#footer {
+        color: white;
+        font-size: 0.5em;
+        font-weight: 400;
+        margin: 0px 36px 36px 36px;
+}
+.credits {
+        margin: 0 auto;
+        text-align: center;
+        font-weight: 400;
+        padding-bottom: 36px;
+}
+a.footer {
+        color: white;
+}
+a.footer:hover {
+        color: #f3734f;
+}
+
+.arrow {
+  float:right;
+  position:relative;
+  width: 0px;
+	height: 0px;
+	border-style: solid;
+	border-width: 3em 3em 0 3em;
+	//border-shadow: 1px 1px 50px #218e9e;
+	border-color: #00adef transparent transparent transparent;
+  -webkit-transform:rotate(360deg)
+}
