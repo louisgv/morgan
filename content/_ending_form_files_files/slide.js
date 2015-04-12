@@ -8,14 +8,11 @@ $(document).ready(function() {
 
   b.click(function(e) {
     if ($(".slide" + (+count + 1)).length) {
-
-      b.html('<span class="arrow-bounce">&#x25BC;</span>');
-      u.html('<span class="arrow-bounce">&#x25B2;</span>');
-
-      count++;
-
+			count++;
       goToByScroll("slide" + count);
 
+      b.html('<span class="arrow-bounce">&#x25BC;</span>');
+			u.html('<span class="arrow-bounce">&#x25B2;</span>');
     } else {
 
 		}
@@ -32,8 +29,10 @@ $(document).ready(function() {
 
 			b.html('<span class="arrow-bounce">&#x25BC;</span>');
       u.html('<span class="arrow-bounce">&#x25B2;</span>');
+    } else {
+			
+		}
 
-    }
 		if (count == 1){
       u.html('<span class="arrow-bounce">&#x27b0;</span>');
     }
