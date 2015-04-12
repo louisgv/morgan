@@ -14,7 +14,7 @@ $(document).ready(function() {
       b.html('<span class="arrow-bounce">&#x25BC;</span>');
 			u.html('<span class="arrow-bounce">&#x25B2;</span>');
     } else {
-
+			$("#submitnarrative").submit;
 		}
 
 		if(!($(".slide" + (+count+1)).length)) {
@@ -30,7 +30,7 @@ $(document).ready(function() {
 			b.html('<span class="arrow-bounce">&#x25BC;</span>');
       u.html('<span class="arrow-bounce">&#x25B2;</span>');
     } else {
-			
+
 		}
 
 		if (count == 1){
