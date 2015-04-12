@@ -1,6 +1,9 @@
 var express = require('express'),
     session = require('express-session'),
-    fs      = require('fs');
+    db      = require('./db.js'),
+    map     = require('./map.js').map,
+    choose  = require('./choose.js'),
+    nar     = require('./narrative.js');
 
 var app = express();
 app.listen(1337);
@@ -8,131 +11,17 @@ app.listen(1337);
 app.use(session({secret : "Morgan Freeman is a snowman who plays the trumpet"}));
 app.use(express.bodyParser());
 app.use(express.static('content'));
-app.use('/node', express.static('content'));
+app.use('/content', express.static('content'));
 
-var map = {
-    'start' : { 0 : 'dispa', 1 : 'dispa', 2 : 'dispa', file : "start.html" },
-    'dispa' : { 0 : 'strat', 1 : 'strat', 2 : 'strat', file : "captionimage.html", zed : "Test comment number 1", one : "Test comment number 2", two : "Test comment number 3" },
-    'strat' : {	0 : 'rpoor', 1 : 'rpoor', 2 : 'rpoor', file : "captionimage.html" },
-    'rpoor' : {	0 : 'event', 1 : 'event', 2 : 'event', file : "captionimage.html" },
-    'event' : {	0 : 'fbook', 1 : 'fbook', 2 : 'fbook', file : "captionimage.html" },
-    'fbook' : {	0 : 'nlike', 1 : 'ylike', 2 : 'nlike', file : "Facebook.html" },
-    'nlike' : { 0 : 'sprot', 1 : 'sprot', 2 : 'sprot', file : "Facebook.html" },
-    'ylike' : { 0 : 'sprot', 1 : 'sprot', 2 : 'sprot', file : "Facebook.html" },
-    'sprot' : { 0 : 'nytim', 1 : 'nytim', 2 : 'nytim', file : "captionimage.html" },
-    'nytim' : { 0 : 'spro2', 1 : 'spro2', 2 : 'spro2', file : "NYTimes.html" },
-    'spro2' : { 0 : '3prot', 1 : '3prot', 2 : '1prot', file : "captionimage.html" },
-    '3prot' : { 0 : '3pigs', 1 : '3pigs', 2 : '3pigs', file : "captionimage.html" },
-    '3pigs' : { 0 : '3twit', 1 : '3twit', 2 : '3twit', file : "captionimage.html" },
-    '3twit' : { 0 : '3pig2', 1 : '3pig2', 2 : '3pig2', file : "Twitter.html" },
-    '3pig2' : { 0 : '3blog', 1 : '3blog', 2 : '3blog', file : "captionimage.html" },
-    '3blog' : { 0 : '3viol', 1 : '3viol', 2 : '3viol', file : "Blog.html" },
-    '3viol' : { 0 : '3riot', 1 : '3cage', 2 : '3cage', file : "captionimage.html" },
-    '3riot' : { 0 : '3died', 1 : '3died', 2 : '3died', file : "captionimage.html" },
-    '3cage' : { 0 : '3died', 1 : '3died', 2 : '3died', file : "captionimage.html" },
-    '1prot' : { 0 : '1pigs', 1 : '1pigs', 2 : '1pigs', file : "captionimage.html" },
-    '1pigs' : { 0 : '1twit', 1 : '1twit', 2 : '1twit', file : "captionimage.html" },
-    '1twit' : { 0 : '1pig2', 1 : '1pig2', 2 : '1pig2', file : "Twitter.html" },
-    '1pig2' : { 0 : '1blog', 1 : '1blog', 2 : '1blog', file : "captionimage.html" },
-    '1blog' : { 0 : '1viol', 1 : '1viol', 2 : '1viol', file : "Blog.html" },
-    '1viol' : { 0 : '1riot', 1 : '1cage', 2 : '1cage', file : "captionimage.html" },
-    '1riot' : { 0 : '1died', 1 : '1died', 2 : '1died', file : "captionimage.html" },
-    '1cage' : { 0 : '1died', 1 : '1died', 2 : '1died', file : "captionimage.html" },
-    '1died' : {	0 : '_exit', 1 : '_exit', 2 : '_exit', file : "Facebook.html" },
-    '3died' : { 0 : '_exit', 1 : '_exit', 2 : '_exit', file : "Facebook.html" },
-    '_exit' : { 0 : '_exit', 1 : '_exit', 2 : '_exit', file : "outtro.html" },
-}
+app.get ('/', choose.retrieve);
+app.get ('/content/:pgsrc', choose.embed);
+app.post('/', choose.process);
 
-var narrative = {
-    'start' : { narrative: 'This is the start' },
-    'dispa' : { narrative: 'There is a lot of disparity', image: 'richpoor.jpg' },
-    'strat' : { narrative: 'Stratification is high', image: 'gentrify.jpg' },
-    'rpoor' : { narrative: 'Poor getting poorer', image: 'poor.jpg' },
-    'event' : { narrative: 'Shocking events happen', image: 'event.jpg' },
-    'fbook' : { narrative: 'Shocking events happen' },
-    'nlike' : { narrative: 'Boo, this is lame', image: 'image.jpg' },
-    'ylike' : { narrative: 'Finally time that the news shows this happening', image: 'image.jpg' },
-    'sprot' : { narrative: 'Protestors are gathering', image: 'sprot.jpg' },
-    'nytim' : { narrative: 'Protestors are gathering' },
-    'spro2' : { narrative: 'Protestors are gathering', image: 'justice.jpg' },
-    '3prot' : { narrative: 'The protestors are restless and numerous', image: 'medium.jpg' },
-    '3pigs' : { narrative: 'The police are here to save the day', image: 'occupy5.jpg' },
-    '3twit' : { narrative: 'Police to unblock the streets from meddling protestors' },
-    '3pig2' : { narrative: 'The police keep people in line', image: 'riot.jpg' },
-    '3viol' : { narrative: 'The hooligans are being kept in line', image: 'fire.jpg' },
-    '3blog' : { narrative: 'The hooligans are being kept in line' },
-    '3riot' : { narrative: 'Rioters block the streets in business district', image: 'brutality.jpg' },
-    '3cage' : { narrative: 'Violent protestors met by peaceful police', image: 'gates.jpg' },
-    '1prot' : { narrative: 'The protestors are restless and numerous', image: 'medium.jpg' },
-    '1pigs' : { narrative: 'The police are here to save the day', image: 'occupy5.jpg' },
-    '1twit' : { narrative: 'Police to unblock the streets from meddling protestors' },
-    '1pig2' : { narrative: 'The police keep people in line', image: 'riot.jpg' },
-    '1viol' : { narrative: 'The hooligans are being kept in line', image: 'fire.jpg' },
-    '1blog' : { narrative: 'The hooligans are being kept in line' },
-    '1riot' : { narrative: 'Rioters block the streets in business district', image: 'brutality.jpg' },
-    '1cage' : { narrative: 'Violent protestors met by peaceful police', image: 'gates.jpg' },
-    '1died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
-    '3died' : { narrative: 'Nobody wants to protest if it isnt nice out', image: 'image.jpg' },
-    '_exit' : { narrative: 'You\'ve been manipulated. Now it is your turn', image: 'image.jpg' }
-}
-
-function embed(req, res) {
-//      res.sendfile(map[req.params.pgsrc].file, {root : 'content'});
-	fs.readFile('./content/' + map[req.params.pgsrc].file, function (err, data) {
-		if (err) return res.json({error : err});
-                var string = "" + data;
-
-                if (narrative[req.session.page].image)      string = string.replace("--IMAGEVALUE--", narrative[req.session.page].image);
-                if (narrative[req.session.page].narrative)  string = string.replace("--REPLACE--", narrative[req.session.page].narrative);
-                
-		res.write(string);
-                res.end();
-        });
-}
-
-function retrieve(req, res) {
-        var s = req.session;
-
-        if (s.page == null) s.page = 'start';
-        if (s.page == "start" || s.page == "_exit") return res.sendfile(map[s.page].file, {root : 'content'});
-
-        var html = "<html><body><iframe src=\"node/";
-        if (s.page == null) s.page = "start";
-        html += s.page + "\" width=\"100%\" height=\"80%\" frameBorder=\"0\"></iframe>";
-	html += "<div style=\"position : absolute; bottom : 0; left : 0\"><form name=\"morgan\" action=\"/\" method=\"POST\">";
-        html += "<input type=\"radio\" name=\"choice\" value=\"0\">" + map[s.page]['zed'] + "<br>";
-        html += "<input type=\"radio\" name=\"choice\" value=\"1\">" + map[s.page]['one'] + "<br>";
-        html += "<input type=\"radio\" name=\"choice\" value=\"2\">" + map[s.page]['two'] + "<br>";
-        html += "<input type=\"submit\" name=\"submit\" value=\"submit\">";
-        html += "</form></div>";
-        html += "</body></html>";
-
-        res.write(html);
-        res.end();
-}
-
-function process(req, res) {
-        var s = req.session;
-        var b = req.body;
-        var c = b.choice;
-
-        if (c >= 0 && c < 3){
-                if (s.choices == null)
-                        s.choices = [];
-
-                s.choices.push(c);
-                s.page = map[s.page][c];
-        } else if (s.page == 'start') {
-        	req.session.email = b.email;
-        	req.session.phone = b.phone;
-                s.page = map[s.page][0];
-        }
-
-	return res.redirect('/');
-}
-
-app.get ('/', retrieve);
-app.get ('/node/:pgsrc', embed);
-app.post('/', process);
+app.get ('/play/:uuid', function (req, res) {
+    nar.loadnarrative(req.params.uuid, function (val) {
+        req.session.narrative = val;
+        res.redirect('/');
+    });
+});
 
 module.exports = app;
