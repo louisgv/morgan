@@ -1,0 +1,17 @@
+button.choicebutton{
+  margin      : 0;
+  padding     : 0;
+  border      : 0;
+  background  : white;
+
+  opacity:      90%;
+
+  font-family : inherit;
+  font-size   : 1em;
+  cursor      : pointer;
+}
+
+button.choicebutton::-moz-focus-inner{
+  padding : 0;
+  border  : 0;
+}

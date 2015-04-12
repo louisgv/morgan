@@ -18,8 +18,8 @@ function createnarrativeget (req, res) {
             html += "<div style=\"height: 717px;\" class=\"slide" + count + " slide\">\r\n"
             html += "<div class=\"content-frame\">\r\n"
 
-            html += "<input type=\"textarea\" name=\"" + key + "\" style=\"width: 100%; height: 100\" /><br>\r\n"
-            html += "<iframe src=\"content/" + key + "\" width=\"100%\" height=\"100%\" frameBorder=\"0\"></iframe>\r\n"
+            html += "<input type=\"textarea\" name='" + key + "' class='narrator-subtitle' /><br>\r\n"
+            html += "<iframe src=\"content/" + key + "\" width=\"100%\" height=\"100%\" frameBorder='0'></iframe>\r\n"
 
             html += "</div>\r\n"
             html += "</div>"
@@ -67,8 +67,7 @@ module.exports.retrieve = function (req, res) {
         }
 
         console.log(s.page);
-
-        var html = "<html><head><style src=\"/content/buttons.css\"></style></head><body><iframe src=\"content/";
+        var html = "<html><head><link rel='stylesheet' type='text/css' href=\"/content/choose.css\"></style></head><body><iframe src=\"content/";
         if (s.page == null) s.page = "start";
         html += s.page + "\" width=\"100%\" height=\"100%\" frameBorder=\"0\"></iframe>";
 	html += "<div style=\"position : absolute; bottom : 0; left : 0; opacity: .8\"><span><form name=\"morgan\" action=\"/\" method=\"POST\">";
