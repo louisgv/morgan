@@ -67,13 +67,19 @@ module.exports.retrieve = function (req, res) {
         }
 
         console.log(s.page);
-        var html = "<html><head><link rel='stylesheet' type='text/css' href=\"/content/choose.css\"></style></head><body><iframe src=\"content/";
+        var html = "<html><head><link rel='stylesheet' type='text/css' href=\"/content/choose.css\"></style></></head><body><iframe src=\"content/";
         if (s.page == null) s.page = "start";
         html += s.page + "\" width=\"100%\" height=\"100%\" frameBorder=\"0\"></iframe>";
 	html += "<div style=\"position : absolute; bottom : 0; left : 0; opacity: .8\"><span><form name=\"morgan\" action=\"/\" method=\"POST\">";
-        html += "<button class=\"choicebutton\" type=\"submit\" name=\"choice\" value=\"0\">" + map[s.page]['zed'] + "</button><br>";
-        html += "<button class=\"choicebutton\" type=\"submit\" name=\"choice\" value=\"1\">" + map[s.page]['one'] + "</button><br>";
-        html += "<button class=\"choicebutton\" type=\"submit\" name=\"choice\" value=\"2\">" + map[s.page]['two'] + "</button><br>";
+
+        html += "<div class='button-holder'>"
+        html += "<button class=\"choice1\" type=\"submit\" name=\"choice\" value=\"0\">" + map[s.page]['zed'] + "</button>";
+        html += "<button class=\"choice2\" type=\"submit\" name=\"choice\" value=\"1\">" + map[s.page]['one'] + "</button>";
+        html += "<button class=\"choice3\" type=\"submit\" name=\"choice\" value=\"2\">" + map[s.page]['two'] + "</button><br>";
+
+
+        html += "</div>"
+
         html += "</form></span></div>";
         html += "</body></html>";
 

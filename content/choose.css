@@ -1,17 +1,52 @@
-button.choicebutton{
-  margin      : 0;
-  padding     : 0;
-  border      : 0;
-  background  : white;
+button {
+  padding: 0;
+  border: 0;
 
-  opacity:      90%;
+  background: rgba(0, 0, 0, 0.72);
+  text-align: center;
+  color: white;
 
-  font-family : inherit;
-  font-size   : 1em;
-  cursor      : pointer;
+  opacity: 45%;
+
+  font-family: inherit;
+
+  font-size: 100%;
+
+  cursor: pointer;
+  transition-duration: .45s;
+  -moz-transition-duration: .45s;
+  -webkit-transition-duration: .45s;
+  -o-transition-duration: .45s;
+
+  text-shadow: 0 0 6px #F5D0A9;
+
+  width: 33.3vw;
+
+  height: 9vw;
 }
+span  {
+   width: 100vw;
+   margin: 0;
+   padding: 0;
+   background-color:#000
+   top: 0;
+   left: 0;
+}
+button.choice1 {
+  background: rgba(205, 95, 49, 0.72);
+}
+button.choice2 {
+  background: rgba(76, 227, 114, 0.72);
+}
+button.choice3 {
+    width: 33.33vw;
 
-button.choicebutton::-moz-focus-inner{
-  padding : 0;
-  border  : 0;
+  background: rgba(51, 109, 210, 0.72);
+}
+button:hover {
+  background: rgba(0, 0, 0, 0.99);
+}
+button.choicebutton::-moz-focus-inner {
+  padding: 0;
+  border: 0;
 }
