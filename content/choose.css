@@ -10,7 +10,7 @@ button {
 
   font-family: inherit;
 
-  font-size: 100%;
+  font-size: 27px;
 
   cursor: pointer;
   transition-duration: .45s;
@@ -33,15 +33,15 @@ span  {
    left: 0;
 }
 button.choice1 {
-  background: rgba(205, 95, 49, 0.72);
+  background: rgba(205, 95, 49, 0.99);
 }
 button.choice2 {
-  background: rgba(76, 227, 114, 0.72);
+  background: rgba(76, 227, 114, 0.99);
 }
 button.choice3 {
     width: 33.33vw;
 
-  background: rgba(51, 109, 210, 0.72);
+  background: rgba(51, 109, 210, 0.99);
 }
 button:hover {
   background: rgba(0, 0, 0, 0.99);
